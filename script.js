@@ -1,4 +1,3 @@
-//your JS code here. If required.
 const submitBtn = document.getElementById('submit');
 const board = document.getElementById('board');
 const message = document.querySelector('.message');
@@ -27,8 +26,8 @@ submitBtn.addEventListener('click', () => {
 	player1 = document.getElementById('player1').value.trim();
 	player2 = document.getElementById('player2').value.trim();
 
-	if(player1 === '' || player2 === ''){
-		alert("Please enter names for both players.");
+	if(player1 === '' || player2 === '') {
+		alert('Please enter names for both players.');
 		return;
 	}
 
