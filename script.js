@@ -18,13 +18,13 @@ const winningCombinations = [
 	[2,5,8],
 	[3,6,9],
 	[1,5,9],
-	[3,5,7]
+	[3,5,7],
 ];
 
 // Setup when submit clicked
 submitBtn.addEventListener('click', () => {
-	player1 = document.getElementById('player1').value.trim();
-	player2 = document.getElementById('player2').value.trim();
+	player1 = document.getElementById('player-1').value.trim();
+	player2 = document.getElementById('player-2').value.trim();
 
 	if(player1 === '' || player2 === '') {
 		alert('Please enter names for both players.');
@@ -37,6 +37,9 @@ submitBtn.addEventListener('click', () => {
 
 	message.textContent = `${currentPlayer}, you're up`;
 	board.style.display = 'grid';
+
+	// Clear any previous content
+	cells.forEach(cell => cell.textContent = '');
 });
 
 // Cell click handler
@@ -45,8 +48,15 @@ cells.forEach(cell => {
 		if (!gameActive || cell.textContent !== '') return;
 
 		cell.textContent = currentSymbol;
+		
 		if (checkWin(currentSymbol)) {
 			message.textContent = `${currentPlayer} congratulations you won!`;
+			gameActive = false;
+			return;
+		}
+
+		if (isDraw()) {
+			message.textContent = `It's a draw!`;
 			gameActive = false;
 			return;
 		}
@@ -74,7 +84,9 @@ function checkWin(symbol) {
 	});
 }
 
-
+function isDraw() {
+	return [...cells].every(cell => cell.textContent !== '');
+}
 
 
 
